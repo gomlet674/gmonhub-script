@@ -88,7 +88,8 @@ Button.MouseButton1Click:Connect(function()
             Notify.Text = "Valid Key!"
             wait(1) 
             ScreenGui:Destroy() 
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/gomlet674/gmonhub-script/main/main.lua"))()
+            wait("0,2") 
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/gomlet674/gmonhub-script/main/main.lua, true"))()
         else 
             Notify.Text = "Wrong Key!" 
         end 
