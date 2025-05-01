@@ -4,7 +4,7 @@ GMON GUI Script untuk Roblox Blox Fruits Fitur: Auto Farm, Sea Events, Prehistor
 
 -- Key System (Manual via GUI, bukan Luarmor) 
 local GMON_KEY = getgenv().Key or ""
-local VALID_KEY = "PASTE_KEY_DISINI"
+local VALID_KEY = "Bcd127aLt94dcp"
 
 if GMON_KEY ~= VALID_KEY then 
   game.StarterGui:SetCore("SendNotification", {
