@@ -45,13 +45,13 @@ Title.Parent = Background
 Title.Size = UDim2.new(1, 0, 0, 50) 
 Title.Position = UDim2.new(0, 0, 0, 10) 
 Title.BackgroundTransparency = 1 
-Title.Text = "Welcome to GMON Hub" 
+Title.Text = "GMON Hub" 
 Title.TextColor3 = Color3.fromRGB(255, 255, 255) 
 Title.Font = Enum.Font.GothamBold 
 Title.TextScaled = true
 
 -- Key Input 
-local TextBox = Instance.new("Enter Your Key Here") 
+local TextBox = Instance.new("TextBox") 
 TextBox.Parent = Background 
 TextBox.Size = UDim2.new(0.8, 0, 0, 40) 
 TextBox.Position = UDim2.new(0.1, 0, 0.5, -20) 
