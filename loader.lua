@@ -1,68 +1,98 @@
-repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
+-- GMON Hub Loader.lua 
+-- Background ID: 94747801090737
 
--- Konfigurasi Key
-local correctKey = "Bcd127aLt94dcp"
+local Players = game:GetService("Players") 
+local HttpService = game:GetService("HttpService") 
+local TweenService = game:GetService("TweenService") 
+local LocalPlayer = Players.LocalPlayer
 
--- GUI
-local CoreGui = game:GetService("CoreGui")
-pcall(function() CoreGui.GMON_Loader:Destroy() end)
+-- Settings 
+local CorrectKey = "Bcd127aLt94dcp" 
+local MainScriptURL = "https://gmonhub-script.vercel.app/main.lua"
 
-local ScreenGui = Instance.new("ScreenGui", CoreGui)
-ScreenGui.Name = "GMON_Loader"
-ScreenGui.ResetOnSpawn = false
+-- GUI Elements 
+local ScreenGui = Instance.new("ScreenGui", game.CoreGui) ScreenGui.Name = "GMONLoader"
 
 -- Background
-local AnimeBG = Instance.new("ImageLabel", ScreenGui)
-AnimeBG.Size = UDim2.new(0, 450, 0, 300)
-AnimeBG.Position = UDim2.new(0.5, -225, 0.5, -150)
-AnimeBG.BackgroundTransparency = 1
-AnimeBG.Image = "rbxassetid://94747801090737"
+local Background = Instance.new("ImageLabel") 
+Background.Parent = ScreenGui 
+Background.Size = UDim2.new(0, 500, 0, 300) 
+Background.Position = UDim2.new(0.5, -250, 0.5, -150) 
+Background.BackgroundTransparency = 1
+Background.Image = "rbxassetid://94747801090737"
 
--- Border putih
-local Border = Instance.new("UICorner", AnimeBG)
-Border.CornerRadius = UDim.new(0, 16)
+-- RGB Border Effect 
+local Border = Instance.new("Frame") 
+Border.Parent = Background 
+Border.Size = UDim2.new(1, 0, 1, 0) 
+Border.BackgroundTransparency = 1 
+Border.BorderSizePixel = 4
 
--- Input Key
-local TextBox = Instance.new("Paste Key here", AnimeBG)
-TextBox.PlaceholderText = "Enter Your Key"
-TextBox.Size = UDim2.new(0.7, 0, 0.1, 0)
-TextBox.Position = UDim2.new(0.15, 0, 0.6, 0)
-TextBox.BackgroundColor3 = Color3.new(1,1,1)
-TextBox.TextColor3 = Color3.new(0,0,0)
-TextBox.Font = Enum.Font.GothamBold
-TextBox.TextSize = 18
+local uiGradient = Instance.new("UIGradient") uiGradient.Color =
+ColorSequence.new { 
+    ColorSequenceKeypoint.new(0.0, Color3.fromRGB(255, 0, 0)), 
+    ColorSequenceKeypoint.new(0.33, Color3.fromRGB(0, 255, 0)), 
+    ColorSequenceKeypoint.new(0.66, Color3.fromRGB(0, 0, 255)), 
+    ColorSequenceKeypoint.new(1.0, Color3.fromRGB(255, 0, 0)), } uiGradient.Rotation = 0 uiGradient.Parent = Border
 
--- Tombol Cek Key
-local CheckButton = Instance.new("TextButton", AnimeBG)
-CheckButton.Size = UDim2.new(0.4, 0, 0.1, 0)
-CheckButton.Position = UDim2.new(0.3, 0, 0.75, 0)
-CheckButton.Text = "Check Key"
-CheckButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-CheckButton.TextColor3 = Color3.new(0, 0, 0)
-CheckButton.Font = Enum.Font.GothamBold
-CheckButton.TextSize = 18
+-- Animate RGB 
+spawn(function() while true do 
+            task.wait(0.05) uiGradient.Rotation = (uiGradient.Rotation + 1) % 360 end end)
 
--- Notifikasi
-local function notify(text, color)
-    local msg = Instance.new("TextLabel", AnimeBG)
-    msg.Size = UDim2.new(1, 0, 0.1, 0)
-    msg.Position = UDim2.new(0, 0, 0.05, 0)
-    msg.BackgroundTransparency = 1
-    msg.Text = text
-    msg.TextColor3 = color
-    msg.Font = Enum.Font.GothamBlack
-    msg.TextScaled = true
-    game:GetService("Debris"):AddItem(msg, 3)
-end
+-- Title 
+local Title = Instance.new("TextLabel") 
+Title.Parent = Background 
+Title.Size = UDim2.new(1, 0, 0, 50) 
+Title.Position = UDim2.new(0, 0, 0, 10) 
+Title.BackgroundTransparency = 1 
+Title.Text = "Welcome to GMON Hub" 
+Title.TextColor3 = Color3.fromRGB(255, 255, 255) 
+Title.Font = Enum.Font.GothamBold 
+Title.TextScaled = true
 
--- Fungsi Validasi Key
-CheckButton.MouseButton1Click:Connect(function()
-    if TextBox.Text == correctKey then
-        notify("Valid Key!", Color3.new(0, 1, 0))
-        wait(1)
-        ScreenGui:Destroy()
-        loadstring(game:HttpGet("https://raw.githubusercontent.com/gomlet674/gmonhub-script/main/main.lua"))()
-    else
-        notify("Wrong Key!", Color3.new(1, 0, 0))
-    end
-end)
+-- Key Input 
+local TextBox = Instance.new("Enter Your Key Here") 
+TextBox.Parent = Background 
+TextBox.Size = UDim2.new(0.8, 0, 0, 40) 
+TextBox.Position = UDim2.new(0.1, 0, 0.5, -20) 
+TextBox.PlaceholderText = "Enter Your Key Here" 
+TextBox.Text = "" 
+TextBox.TextColor3 = Color3.fromRGB(0, 0, 0) 
+TextBox.Font = Enum.Font.Gotham 
+TextBox.TextScaled = true
+
+-- Button 
+local Button = Instance.new("TextButton") 
+Button.Parent = Background 
+Button.Size = UDim2.new(0.5, 0, 0, 40) 
+Button.Position = UDim2.new(0.25, 0, 0.75, 0) 
+Button.Text = "Check Key" 
+Button.TextColor3 = Color3.fromRGB(255, 255, 255) 
+Button.BackgroundColor3 = Color3.fromRGB(0, 170, 255) 
+Button.Font = Enum.Font.GothamBold 
+Button.TextScaled = true
+
+-- Notification 
+local Notify = Instance.new("TextLabel") 
+Notify.Parent = Background 
+Notify.Size = UDim2.new(1, 0, 0, 25) 
+Notify.Position = UDim2.new(0, 0, 0.9, 0) 
+Notify.BackgroundTransparency = 1 
+Notify.Text = "" Notify.TextColor3 = Color3.fromRGB(255, 255, 0) 
+Notify.Font = Enum.Font.Gotham 
+Notify.TextScaled = true
+
+-- Key Check Logic 
+Button.MouseButton1Click:Connect(function() 
+        if TextBox.Text == CorrectKey then
+            Notify.Text = "Valid Key!"
+            wait(1) 
+            ScreenGui:Destroy() 
+            loadstring(game:HttpGet(MainScriptURL))()
+        else 
+            Notify.Text = "Wrong Key!" 
+        end 
+    end)
+
+-- Done
+
