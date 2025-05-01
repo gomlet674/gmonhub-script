@@ -114,7 +114,7 @@ tabLeviathan:NewButton("Auto Take Heart", "Ambil Leviathan Heart", function()
 -- Notifikasi berhasil 
 game.StarterGui:SetCore("SendNotification", { 
     Title = "GMON Hub",
-    Text = "Key valid! GUI berhasil dimuat.", 
+    Text = "Key valid! Wait a second.", 
     Duration = 8 
   } )
 
