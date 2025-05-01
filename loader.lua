@@ -35,6 +35,16 @@ ColorSequence.new {
     ColorSequenceKeypoint.new(0.66, Color3.fromRGB(0, 0, 255)), 
     ColorSequenceKeypoint.new(1.0, Color3.fromRGB(255, 0, 0)), } uiGradient.Rotation = 0 uiGradient.Parent = Border
 
+local Button = Instance.new("TextButton") 
+Button.parent = Background
+Button.size = IDim2.new("0.3, 0, 0, 40") 
+Button.position = UDim2.new(0.20, 0, 0.75, 0")
+    Button.Text = "Get Key"
+    Button.Textcolor3 = color3.fromRGB(0, 0, 0) 
+Button.BackgroundColor3 = Color3.fromRGB(0, 170, 255) 
+Button.Font = Enum.Font.GothamBold 
+Button.TextScaled = true
+
 -- Animate RGB 
 spawn(function() while true do 
             task.wait(0.05) uiGradient.Rotation = (uiGradient.Rotation + 1) % 360 end end)
@@ -53,7 +63,7 @@ Title.TextScaled = true
 -- Key Input 
 local TextBox = Instance.new("TextBox") 
 TextBox.Parent = Background 
-TextBox.Size = UDim2.new(0.8, 0, 0, 40) 
+TextBox.Size = UDim2.new(0.7, 0, 0, 40) 
 TextBox.Position = UDim2.new(0.1, 0, 0.5, -20) 
 TextBox.PlaceholderText = "Enter Your Key Here" 
 TextBox.Text = "" 
@@ -64,7 +74,7 @@ TextBox.TextScaled = true
 -- Button 
 local Button = Instance.new("TextButton") 
 Button.Parent = Background 
-Button.Size = UDim2.new(0.5, 0, 0, 40) 
+Button.Size = UDim2.new(0.3, 0, 0, 40) 
 Button.Position = UDim2.new(0.25, 0, 0.75, 0) 
 Button.Text = "Check Key" 
 Button.TextColor3 = Color3.fromRGB(255, 255, 255) 
@@ -88,6 +98,7 @@ Button.MouseButton1Click:Connect(function()
             Notify.Text = "Valid Key!"
             wait(1) 
             ScreenGui:Destroy() 
+           if wait("0.2") then 
             loadstring(game:HttpGet("https://raw.githubusercontent.com/gomlet674/gmonhub-script/main/main.lua"))()
         else 
             Notify.Text = "Wrong Key!" 
