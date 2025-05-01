@@ -71,14 +71,14 @@ local UICorner3 = Instance.new("UICorner", Submit)
 UICorner3.CornerRadius = UDim.new(0, 6)
 
 -- Validasi kunci
-local validKey = "GMON-1234" -- Ganti dengan validasi kunci dari Linkvertise nantinya
+local validKey = "Bcd127aLt94dcp" -- Ganti dengan validasi kunci dari Linkvertise nantinya
 
 Submit.MouseButton1Click:Connect(function()
     if KeyBox.Text == validKey then
         Gui:Destroy()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/gomlet674/gmonhub-script/main/main.lua"))()
     else
-        Submit.Text = "Kunci Salah!"
+        Submit.Text = "wrong key!"
         wait(1)
         Submit.Text = "Submit Key"
     end
