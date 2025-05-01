@@ -22,24 +22,8 @@ AnimeBG.Image = "rbxassetid://94747801090737"
 local Border = Instance.new("UICorner", AnimeBG)
 Border.CornerRadius = UDim.new(0, 16)
 
--- Efek cahaya pinggir
-local rotating = Instance.new("ImageLabel", AnimeBG)
-rotating.Size = UDim2.new(1.2, 0, 1.2, 0)
-rotating.Position = UDim2.new(-0.1, 0, -0.1, 0)
-rotating.Image = "rbxassetid://88817335071002"
-rotating.BackgroundTransparency = 1
-rotating.ZIndex = 0
-
--- Animasi cahaya berputar
-spawn(function()
-    while rotating do
-        rotating.Rotation = (rotating.Rotation + 1) % 360
-        wait(0.01)
-    end
-end)
-
 -- Input Key
-local TextBox = Instance.new("TextBox", AnimeBG)
+local TextBox = Instance.new("Paste Key here", AnimeBG)
 TextBox.PlaceholderText = "Enter Your Key"
 TextBox.Size = UDim2.new(0.7, 0, 0.1, 0)
 TextBox.Position = UDim2.new(0.15, 0, 0.6, 0)
