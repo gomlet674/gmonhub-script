@@ -1,36 +1,78 @@
--- GMON Hub Loader.lua
--- Background ID: 94747801090737
+-- GMON Hub Main GUI
+local TweenService = game:GetService("TweenService") 
+local CoreGui = game:GetService("CoreGui")
 
-local Players = game:GetService("Players") local HttpService = game:GetService("HttpService") local TweenService = game:GetService("TweenService") local LocalPlayer = Players.LocalPlayer
+-- Background UI 
+local MainUI = Instance.new("ScreenGui", CoreGui) 
+MainUI.Name = "GMON_Main"
 
--- Settings 
-local CorrectKey = "Bcd127aLt94dcp" 
-local MainScriptURL = "https://gmonhub-script.vercel.app/main.lua"
+local BG = Instance.new("ImageLabel") 
+BG.Name = "BG" 
+BG.Parent = MainUI 
+BG.Size = UDim2.new(0, 600, 0, 400) 
+BG.Position = UDim2.new(0.5, -300, 0.5, -200) 
+BG.BackgroundTransparency = 1 
+BG.Image = "rbxassetid://88817335071002"
 
--- GUI Elements
-local ScreenGui = Instance.new("ScreenGui", game.CoreGui) ScreenGui.Name = "GMONLoader"
+-- RGB Stroke Pinggira 
+local Stroke = Instance.new("UIStroke") 
+Stroke.Thickness = 4 Stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border 
+Stroke.Parent = BG
 
--- Background 
-local Background = Instance.new("ImageLabel") Background.Parent = ScreenGui Background.Size = UDim2.new(0, 500, 0, 300) Background.Position = UDim2.new(0.5, -250, 0.5, -150) Background.BackgroundTransparency = 1 Background.Image = "rbxassetid://94747801090737"
+-- Tween RGB effect 
+local function tweenRGB() 
+  local colors = { Color3.fromRGB(255, 0, 0),    
+    -- Merah Color3.fromRGB(255, 255, 0),  
+    -- Kuning Color3.fromRGB(0, 255, 0),  
+    -- Hijau Color3.fromRGB(0, 255, 255),  
+    -- Cyan Color3.fromRGB(0, 0, 255),   
+    -- Biru Color3.fromRGB(255, 0, 255) 
+    -- Magenta }
 
--- RGB Border Effect 
-local Border = Instance.new("Frame") Border.Parent = Background Border.Size = UDim2.new(1, 0, 1, 0) Border.BackgroundTransparency = 1 Border.BorderSizePixel = 4
+local i = 1
+while Stroke and Stroke.Parent do
+    local nextColor = colors[(i % #colors) + 1]
+    local tween = TweenService:Create(Stroke, TweenInfo.new(0.5), {Color = nextColor})
+    tween:Play()
+    tween.Completed:Wait()
+    i += 1
+end
 
-local uiGradient = Instance.new("UIGradient") uiGradient.Color = ColorSequence.new { ColorSequenceKeypoint.new(0.0, Color3.fromRGB(255, 0, 0)), ColorSequenceKeypoint.new(0.33, Color3.fromRGB(0, 255, 0)), ColorSequenceKeypoint.new(0.66, Color3.fromRGB(0, 0, 255)), ColorSequenceKeypoint.new(1.0, Color3.fromRGB(255, 0, 0)), } uiGradient.Rotation = 0 uiGradient.Parent = Border
+end
 
--- Animate RGB 
-spawn(function() while true do task.wait(0.05) uiGradient.Rotation = (uiGradient.Rotation + 1) % 360 end end)
+coroutine.wrap(tweenRGB)()
 
--- Title
-local Title = Instance.new("TextLabel") Title.Parent = Background Title.Size = UDim2.new(1, 0, 0, 50) Title.Position = UDim2.new(0, 0, 0, 10) Title.BackgroundTransparency = 1 Title.Text = "Welcome to GMON Hub" Title.TextColor3 = Color3.fromRGB(255, 255, 255) Title.Font = Enum.Font.GothamBold Title.TextScaled = true
+-- Tulisan GMON Hub
+  local Label = Instance.new("TextLabel") 
+  Label.Parent = BG Label.Text = "GMON Hub" 
+  Label.TextSize = 24 Label.Font = Enum.Font.FredokaOne 
+  Label.TextColor3 = Color3.fromRGB(255, 255, 255) 
+  Label.BackgroundTransparency = 1 
+  Label.Position = UDim2.new(0, 10, 0, 10) 
+  Label.Size = UDim2.new(0, 200, 0, 40)
 
--- Key Input local TextBox = Instance.new("TextBox") TextBox.Parent = Background TextBox.Size = UDim2.new(0.8, 0, 0, 40) TextBox.Position = UDim2.new(0.1, 0, 0.5, -20) TextBox.PlaceholderText = "Enter Your Key Here" TextBox.Text = "" TextBox.TextColor3 = Color3.fromRGB(0, 0, 0) TextBox.Font = Enum.Font.Gotham TextBox.TextScaled = true
+-- Toggle Button
+  local Toggle = Instance.new("ImageButton") 
+  Toggle.Name = "ToggleUI" Toggle.Parent = MainUI 
+  Toggle.Size = UDim2.new(0, 45, 0, 45) 
+  Toggle.Position = UDim2.new(0, 20, 0.5, -100) 
+  Toggle.BackgroundTransparency = 1
+  Toggle.Image = "rbxassetid://94747801090737"
 
--- Button local Button = Instance.new("TextButton") Button.Parent = Background Button.Size = UDim2.new(0.5, 0, 0, 40) Button.Position = UDim2.new(0.25, 0, 0.75, 0) Button.Text = "Check Key" Button.TextColor3 = Color3.fromRGB(255, 255, 255) Button.BackgroundColor3 = Color3.fromRGB(0, 170, 255) Button.Font = Enum.Font.GothamBold Button.TextScaled = true
+Toggle.MouseButton1Click:Connect(function() BG.Visible = not BG.Visible end)
 
--- Notification local Notify = Instance.new("TextLabel") Notify.Parent = Background Notify.Size = UDim2.new(1, 0, 0, 25) Notify.Position = UDim2.new(0, 0, 0.9, 0) Notify.BackgroundTransparency = 1 Notify.Text = "" Notify.TextColor3 = Color3.fromRGB(255, 255, 0) Notify.Font = Enum.Font.Gotham Notify.TextScaled = true
+-- Placeholder untuk fitur -- Tambahkan fitur GMON di sini seperti Auto Farm, Sea Events, dll
 
--- Key Check Logic Button.MouseButton1Click:Connect(function() if TextBox.Text == CorrectKey then Notify.Text = "Valid Key!" wait(1) ScreenGui:Destroy() loadstring(game:HttpGet(MainScriptURL))() else Notify.Text = "Wrong Key!" end end)
+-- Contoh fitur dasar
+  local AutoFarm = Instance.new("TextButton") 
+  AutoFarm.Parent = BG 
+  AutoFarm.Size = UDim2.new(0, 200, 0, 50) 
+  AutoFarm.Position = UDim2.new(0, 50, 0, 100) 
+  AutoFarm.Text = "[ON/OFF] Auto Farm"
+  AutoFarm.BackgroundColor3 = Color3.fromRGB(30,30,30) 
+  AutoFarm.TextColor3 = Color3.fromRGB(255,255,255) 
+  AutoFarm.Font = Enum.Font.Gotham 
+  AutoFarm.TextSize = 18
 
--- Done
+-- Implementasi lebih lanjut menyusul...
 
