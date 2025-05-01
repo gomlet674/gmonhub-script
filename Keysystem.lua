@@ -20,7 +20,7 @@ Frame.BackgroundTransparency = 1
 local Background = Instance.new("ImageLabel", Frame)
 Background.Size = UDim2.new(1, 0, 1, 0)
 Background.Position = UDim2.new(0, 0, 0, 0)
-Background.Image = "rbxassetid://1234567890" -- Ganti dengan ID gambar anime Anda
+Background.Image = "rbxassetid://94747801090737" -- Ganti dengan ID gambar anime Anda
 Background.BackgroundTransparency = 1
 
 -- Efek gradien
