@@ -1,85 +1,84 @@
--- keysystem.lua
+repeat wait() until game:IsLoaded() and game.Players.LocalPlayer
 
--- Hapus GUI sebelumnya jika ada
-if game.CoreGui:FindFirstChild("GMON_KEY_GUI") then
-    game.CoreGui:FindFirstChild("GMON_KEY_GUI"):Destroy()
+-- Konfigurasi Key
+local correctKey = "Bcd127aLt94dcp"
+
+-- GUI
+local CoreGui = game:GetService("CoreGui")
+pcall(function() CoreGui.GMON_Loader:Destroy() end)
+
+local ScreenGui = Instance.new("ScreenGui", CoreGui)
+ScreenGui.Name = "GMON_Loader"
+ScreenGui.ResetOnSpawn = false
+
+-- Background
+local AnimeBG = Instance.new("ImageLabel", ScreenGui)
+AnimeBG.Size = UDim2.new(0, 450, 0, 300)
+AnimeBG.Position = UDim2.new(0.5, -225, 0.5, -150)
+AnimeBG.BackgroundTransparency = 1
+AnimeBG.Image = "rbxassetid://94747801090737"
+
+-- Border putih
+local Border = Instance.new("UICorner", AnimeBG)
+Border.CornerRadius = UDim.new(0, 16)
+
+-- Efek cahaya pinggir
+local rotating = Instance.new("ImageLabel", AnimeBG)
+rotating.Size = UDim2.new(1.2, 0, 1.2, 0)
+rotating.Position = UDim2.new(-0.1, 0, -0.1, 0)
+rotating.Image = "rbxassetid://88817335071002"
+rotating.BackgroundTransparency = 1
+rotating.ZIndex = 0
+
+-- Animasi cahaya berputar
+spawn(function()
+    while rotating do
+        rotating.Rotation = (rotating.Rotation + 1) % 360
+        wait(0.01)
+    end
+end)
+
+-- Input Key
+local TextBox = Instance.new("TextBox", AnimeBG)
+TextBox.PlaceholderText = "Enter Your Key"
+TextBox.Size = UDim2.new(0.7, 0, 0.1, 0)
+TextBox.Position = UDim2.new(0.15, 0, 0.6, 0)
+TextBox.BackgroundColor3 = Color3.new(1,1,1)
+TextBox.TextColor3 = Color3.new(0,0,0)
+TextBox.Font = Enum.Font.GothamBold
+TextBox.TextSize = 18
+
+-- Tombol Cek Key
+local CheckButton = Instance.new("TextButton", AnimeBG)
+CheckButton.Size = UDim2.new(0.4, 0, 0.1, 0)
+CheckButton.Position = UDim2.new(0.3, 0, 0.75, 0)
+CheckButton.Text = "Check Key"
+CheckButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+CheckButton.TextColor3 = Color3.new(0, 0, 0)
+CheckButton.Font = Enum.Font.GothamBold
+CheckButton.TextSize = 18
+
+-- Notifikasi
+local function notify(text, color)
+    local msg = Instance.new("TextLabel", AnimeBG)
+    msg.Size = UDim2.new(1, 0, 0.1, 0)
+    msg.Position = UDim2.new(0, 0, 0.05, 0)
+    msg.BackgroundTransparency = 1
+    msg.Text = text
+    msg.TextColor3 = color
+    msg.Font = Enum.Font.GothamBlack
+    msg.TextScaled = true
+    game:GetService("Debris"):AddItem(msg, 3)
 end
 
--- Buat GUI utama
-local Gui = Instance.new("ScreenGui", game.CoreGui)
-Gui.Name = "GMON_KEY_GUI"
-Gui.ResetOnSpawn = false
-
--- Frame utama
-local Frame = Instance.new("Frame", Gui)
-Frame.Size = UDim2.new(0, 500, 0, 300)
-Frame.Position = UDim2.new(0.5, -250, 0.5, -150)
-Frame.BackgroundTransparency = 1
-
--- Gambar latar belakang
-local Background = Instance.new("ImageLabel", Frame)
-Background.Size = UDim2.new(1, 0, 1, 0)
-Background.Position = UDim2.new(0, 0, 0, 0)
-Background.Image = "rbxassetid://94747801090737" -- Ganti dengan ID gambar anime Anda
-Background.BackgroundTransparency = 1
-
--- Efek gradien
-local Gradient = Instance.new("UIGradient", Background)
-Gradient.Color = ColorSequence.new{
-    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 255, 255)),
-    ColorSequenceKeypoint.new(1, Color3.fromRGB(200, 200, 200))
-}
-Gradient.Rotation = 90
-
--- Sudut membulat
-local UICorner = Instance.new("UICorner", Background)
-UICorner.CornerRadius = UDim.new(0, 12)
-
--- Label judul
-local Title = Instance.new("TextLabel", Frame)
-Title.Size = UDim2.new(1, 0, 0, 50)
-Title.Position = UDim2.new(0, 0, 0, 0)
-Title.Text = "GMON Key System"
-Title.Font = Enum.Font.GothamBold
-Title.TextSize = 24
-Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-Title.BackgroundTransparency = 1
-
--- Kotak input kunci
-local KeyBox = Instance.new("TextBox", Frame)
-KeyBox.Position = UDim2.new(0.1, 0, 0.4, 0)
-KeyBox.Size = UDim2.new(0.8, 0, 0, 35)
-KeyBox.PlaceholderText = "Paste key here..."
-KeyBox.Text = ""
-KeyBox.Font = Enum.Font.Gotham
-KeyBox.TextSize = 18
-KeyBox.TextColor3 = Color3.fromRGB(0, 0, 0)
-KeyBox.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-local UICorner2 = Instance.new("UICorner", KeyBox)
-UICorner2.CornerRadius = UDim.new(0, 6)
-
--- Tombol submit
-local Submit = Instance.new("TextButton", Frame)
-Submit.Position = UDim2.new(0.3, 0, 0.7, 0)
-Submit.Size = UDim2.new(0.4, 0, 0, 35)
-Submit.Text = "Submit Key"
-Submit.Font = Enum.Font.GothamBold
-Submit.TextSize = 18
-Submit.TextColor3 = Color3.fromRGB(255, 255, 255)
-Submit.BackgroundColor3 = Color3.fromRGB(60, 150, 255)
-local UICorner3 = Instance.new("UICorner", Submit)
-UICorner3.CornerRadius = UDim.new(0, 6)
-
--- Validasi kunci
-local validKey = "Bcd127aLt94dcp" -- Ganti dengan validasi kunci dari Linkvertise nantinya
-
-Submit.MouseButton1Click:Connect(function()
-    if KeyBox.Text == validKey then
-        Gui:Destroy()
+-- Fungsi Validasi Key
+CheckButton.MouseButton1Click:Connect(function()
+    if TextBox.Text == correctKey then
+        notify("Valid Key!", Color3.new(0, 1, 0))
+        wait(1)
+        ScreenGui:Destroy()
         loadstring(game:HttpGet("https://raw.githubusercontent.com/gomlet674/gmonhub-script/main/main.lua"))()
     else
-        Submit.Text = "wrong key!"
-        wait(1)
-        Submit.Text = "Submit Key"
+        notify("Wrong Key!", Color3.new(1, 0, 0))
     end
 end)
