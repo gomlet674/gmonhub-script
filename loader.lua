@@ -43,7 +43,7 @@ notif.Text = ""
 
 -- Key System
 local validKey = "Bcd127aLt94dcp"
-local mainScriptURL = "https://raw.githubusercontent.com/gomlet674/gmonhub-script/main/main.lua"
+local mainScriptURL = "https://raw.githubusercontent.com/gomlet674/gmonhub-script/main/main.lua, true"
 
 checkBtn.MouseButton1Click:Connect(function()
     if keyBox.Text == validKey then
@@ -51,7 +51,8 @@ checkBtn.MouseButton1Click:Connect(function()
         notif.Text = "Valid Key! Loading script..."
         wait(1)
         ScreenGui:Destroy()
-        loadstring(game:HttpGet(mainScriptURL))()
+        loadstring(game:HttpGet("https://raw.githubusercontent.com/gomlet674/gmonhub-script/main/main.lua, true"))
+        () 
     else
         notif.TextColor3 = Color3.new(1, 0, 0)
         notif.Text = "Wrong Key!"
