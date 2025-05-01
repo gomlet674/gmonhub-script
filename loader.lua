@@ -32,7 +32,7 @@ local function showKeyGui()
     GetKeyButton.Size = UDim2.new(0.4, 0, 0, 30)
     GetKeyButton.Position = UDim2.new(0.05, 0, 0.4, 0)
     GetKeyButton.MouseButton1Click:Connect(function()
-        setclipboard("https://linkvertise.com/your-key-url")
+        setclipboard("https://direct-link.net/1209226/gmon-hub-get-key-system-g")
         GuiService:SetCore("SendNotification", {
             Title = "GMON Key";
             Text = "Link copied! Paste in browser.";
