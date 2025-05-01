@@ -6,7 +6,7 @@ local HttpService =
 game:GetService("HttpService")
 local GuiService =
 game:GetService("StarterGui")
-local VALID_KEY = "gmon123key"
+local VALID_KEY = "Bcd127aLt94dcp"
 
 local function showKeyGui()
     local ScreenGui = 
