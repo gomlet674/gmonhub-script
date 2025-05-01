@@ -1,78 +1,55 @@
--- GMON Hub Main GUI
-local TweenService = game:GetService("TweenService") 
-local CoreGui = game:GetService("CoreGui")
+-- Memuat Rayfield UI Library
+local Rayfield = loadstring(game:HttpGet('https://raw.githubusercontent.com/shlexware/Rayfield/main/source'))()
 
--- Background UI 
-local MainUI = Instance.new("ScreenGui", CoreGui) 
-MainUI.Name = "GMON_Main"
+-- Membuat jendela utama
+local Window = Rayfield:CreateWindow({
+    Name = "GMON Hub",
+    LoadingTitle = "GMON Hub",
+    LoadingSubtitle = "by Gomlet674",
+    ConfigurationSaving = {
+        Enabled = true,
+        FolderName = "GMONHub",
+        FileName = "GMONConfig"
+    },
+    Discord = {
+        Enabled = false,
+        Invite = "",
+        RememberJoins = true
+    },
+    KeySystem = false,
+    KeySettings = {
+        Title = "GMON Hub",
+        Subtitle = "Key System",
+        Note = "Join the discord (discord.gg/GMONHub)",
+        SaveKey = true,
+        GrabKeyFromSite = false,
+        Key = {"Bcd127aLt94dcp"}
+    }
+})
 
-local BG = Instance.new("ImageLabel") 
-BG.Name = "BG" 
-BG.Parent = MainUI 
-BG.Size = UDim2.new(0, 600, 0, 400) 
-BG.Position = UDim2.new(0.5, -300, 0.5, -200) 
-BG.BackgroundTransparency = 1 
-BG.Image = "rbxassetid://88817335071002"
+-- Membuat tab "Main"
+local MainTab = Window:CreateTab("Main", 4483362458) -- ID ikon dapat disesuaikan
 
--- RGB Stroke Pinggira 
-local Stroke = Instance.new("UIStroke") 
-Stroke.Thickness = 4 Stroke.ApplyStrokeMode = Enum.ApplyStrokeMode.Border 
-Stroke.Parent = BG
+-- Menambahkan tombol ke tab "Main"
+MainTab:CreateButton({
+    Name = "Auto Farm",
+    Callback = function()
+        -- Implementasi fitur Auto Farm
+    end,
+})
 
--- Tween RGB effect 
-local function tweenRGB() 
-  local colors = { Color3.fromRGB(255, 0, 0),    
-    -- Merah Color3.fromRGB(255, 255, 0),  
-    -- Kuning Color3.fromRGB(0, 255, 0),  
-    -- Hijau Color3.fromRGB(0, 255, 255),  
-    -- Cyan Color3.fromRGB(0, 0, 255),   
-    -- Biru Color3.fromRGB(255, 0, 255) 
-    -- Magenta }
+MainTab:CreateButton({
+    Name = "Sea Events",
+    Callback = function()
+        -- Implementasi fitur Sea Events
+    end,
+})
 
-local i = 1
-while Stroke and Stroke.Parent do
-    local nextColor = colors[(i % #colors) + 1]
-    local tween = TweenService:Create(Stroke, TweenInfo.new(0.5), {Color = nextColor})
-    tween:Play()
-    tween.Completed:Wait()
-    i += 1
-end
+MainTab:CreateButton({
+    Name = "Leviathan",
+    Callback = function()
+        -- Implementasi fitur Leviathan
+    end,
+})
 
-end
-
-coroutine.wrap(tweenRGB)()
-
--- Tulisan GMON Hub
-  local Label = Instance.new("TextLabel") 
-  Label.Parent = BG Label.Text = "GMON Hub" 
-  Label.TextSize = 24 Label.Font = Enum.Font.FredokaOne 
-  Label.TextColor3 = Color3.fromRGB(255, 255, 255) 
-  Label.BackgroundTransparency = 1 
-  Label.Position = UDim2.new(0, 10, 0, 10) 
-  Label.Size = UDim2.new(0, 200, 0, 40)
-
--- Toggle Button
-  local Toggle = Instance.new("ImageButton") 
-  Toggle.Name = "ToggleUI" Toggle.Parent = MainUI 
-  Toggle.Size = UDim2.new(0, 45, 0, 45) 
-  Toggle.Position = UDim2.new(0, 20, 0.5, -100) 
-  Toggle.BackgroundTransparency = 1
-  Toggle.Image = "rbxassetid://94747801090737"
-
-Toggle.MouseButton1Click:Connect(function() BG.Visible = not BG.Visible end)
-
--- Placeholder untuk fitur -- Tambahkan fitur GMON di sini seperti Auto Farm, Sea Events, dll
-
--- Contoh fitur dasar
-  local AutoFarm = Instance.new("TextButton") 
-  AutoFarm.Parent = BG 
-  AutoFarm.Size = UDim2.new(0, 200, 0, 50) 
-  AutoFarm.Position = UDim2.new(0, 50, 0, 100) 
-  AutoFarm.Text = "[ON/OFF] Auto Farm"
-  AutoFarm.BackgroundColor3 = Color3.fromRGB(30,30,30) 
-  AutoFarm.TextColor3 = Color3.fromRGB(255,255,255) 
-  AutoFarm.Font = Enum.Font.Gotham 
-  AutoFarm.TextSize = 18
-
--- Implementasi lebih lanjut menyusul...
-
+-- Anda dapat menambahkan tab dan tombol tambahan sesuai kebutuhan
