@@ -15,7 +15,7 @@ end
 
 -- Jika sudah tersimpan dan valid, langsung buka main.lua
 if savedKey and checkKey(savedKey) then
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/gomlet674/G-Mon-Hub/main/main.lua"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/gomlet674/gmonhub-script/main/main.lua"))()
 else
     -- Tampilkan UI Get Key
     local ScreenGui = Instance.new("ScreenGui", game.CoreGui)
