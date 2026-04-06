@@ -73,7 +73,7 @@ else
         if checkKey(inputKey) then
             writefile(savedKeyPath, inputKey)
             ScreenGui:Destroy()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/gomlet674/G-Mon-Hub/main/main.lua"))()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/gomlet674/gmonhub-script/main/main.lua"))()
         else
             Submit.Text = "Invalid Key!"
             task.wait(1.5)
